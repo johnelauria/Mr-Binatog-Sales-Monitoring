@@ -1,0 +1,359 @@
+<ScrollView 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="wrap_content"
+    android:layout_height="fill_parent">
+	<LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:orientation="vertical"
+	    tools:context=".MainActivity$DummySectionFragment" >
+	
+	    <TextView
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:textSize="15sp"
+	        android:background="#333"
+	        android:gravity="center"
+	        android:textColor="#0AF"
+	        android:textStyle="bold"
+	        android:text="Select Size: " />
+	
+	    <LinearLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal"
+	        android:weightSum="99" >
+	
+	        <Button
+	            android:id="@+id/fragment1Small"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="33"
+	            android:text="Small" />
+	
+	        <Button
+	            android:id="@+id/fragment1Medium"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="33"
+	            android:text="Medium" />
+	
+	        <Button
+	            android:id="@+id/fragment1Large"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="33"
+	            android:text="Large" />
+	    </LinearLayout>
+	    
+	    <TextView
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:textSize="15sp"
+	        android:background="#333"
+	        android:gravity="center"
+	        android:textColor="#0AF"
+	        android:textStyle="bold"
+	        android:text="Select Flavor: " />
+	
+	    <LinearLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal"
+	        android:layout_marginTop="5dp"
+	        android:weightSum="4">
+	    
+		    <Button
+		        android:id="@+id/bMilky"
+		        style="?android:attr/buttonStyleSmall"
+		        android:layout_width="40dp"
+		        android:layout_weight="1"
+		        android:layout_height="45dp"
+		        android:background="@drawable/milk_icon" />
+		    
+		    <Button
+		        android:id="@+id/bCheese"
+		        style="?android:attr/buttonStyleSmall"
+		        android:layout_width="40dp"
+		        android:layout_weight="1"
+		        android:layout_height="45dp"
+		        android:background="@drawable/cheese_icon" />
+		    
+		    <Button
+		        android:id="@+id/bButter"
+		        style="?android:attr/buttonStyleSmall"
+		        android:layout_width="40dp"
+		        android:layout_weight="1"
+		        android:layout_height="45dp"
+		        android:background="@drawable/butter_icon" />
+		    
+		    <Button
+		        android:id="@+id/bChoco"
+		        style="?android:attr/buttonStyleSmall"
+		        android:layout_width="40dp"
+		        android:layout_weight="1"
+		        android:layout_height="45dp"
+		        android:background="@drawable/choco_icon" />
+	    
+	    </LinearLayout>
+	
+	    <TableLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:padding="5dp"
+	        android:stretchColumns="*" >
+	
+	        <TableRow
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:padding="5dp" >
+	
+	            <TextView
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:gravity="center"
+	                android:text="Order"
+	                android:textStyle="bold" />
+	
+	            <TextView
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:gravity="center"
+	                android:text="Quantity"
+	                android:textStyle="bold" />
+	
+	            <TextView
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:gravity="center"
+	                android:text="Price"
+	                android:textStyle="bold" />
+	        </TableRow>
+	
+	        <TableRow
+	            android:id="@+id/trLarge"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:padding="5dp"
+	            android:visibility="gone" >
+	
+	            <TextView
+	                android:id="@+id/tvLargeOrder"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:gravity="center"
+	                android:text="Large" />
+	
+	            <TextView
+	                android:id="@+id/tvLargeQty"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:gravity="center" />
+	
+	            <TextView
+	                android:id="@+id/tvLargeOrderPrice"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:gravity="center"
+	                android:text="P0.00" />
+	        </TableRow>
+	
+	        <TableRow
+	            android:id="@+id/trMed"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:padding="5dp"
+	            android:visibility="gone" >
+	
+	            <TextView
+	                android:id="@+id/tvMedOrder"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:gravity="center"
+	                android:text="Medium" />
+	
+	            <TextView
+	                android:id="@+id/tvMedQty"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:gravity="center" />
+	
+	            <TextView
+	                android:id="@+id/tvMedOrderPrice"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:gravity="center"
+	                android:text="P0.00" />
+	        </TableRow>
+	
+	        <TableRow
+	            android:id="@+id/trSmall"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:padding="5dp"
+	            android:visibility="gone" >
+	
+	            <TextView
+	                android:id="@+id/tvSmallOrder"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:gravity="center"
+	                android:text="Small" />
+	
+	            <TextView
+	                android:id="@+id/tvSmallQty"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:gravity="center" />
+	
+	            <TextView
+	                android:id="@+id/tvSmallOrderPrice"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:gravity="center"
+	                android:text="P0.00" />
+	        </TableRow>
+	        
+	        <TableRow
+	            android:id="@+id/trMilky"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:padding="5dp"
+	            android:visibility="gone" >
+	
+	            <TextView
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:gravity="center"
+	                android:text="Milky Way" />
+	
+	            <TextView
+	                android:id="@+id/tvMilkyQty"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:gravity="center" />
+	
+	            <TextView
+	                android:id="@+id/tvMilkyTotal"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:gravity="center"
+	                android:text="P0.00" />
+	        </TableRow>
+	        
+	        <TableRow
+	            android:id="@+id/trCheese"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:padding="5dp"
+	            android:visibility="gone" >
+	
+	            <TextView
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:gravity="center"
+	                android:text="Cheese" />
+	
+	            <TextView
+	                android:id="@+id/tvCheeseQty"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:gravity="center" />
+	
+	            <TextView
+	                android:id="@+id/tvCheeseTotal"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:gravity="center" />
+	        </TableRow>
+	        
+	        <TableRow
+	            android:id="@+id/trButter"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:padding="5dp"
+	            android:visibility="gone" >
+	
+	            <TextView
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:gravity="center"
+	                android:text="Butter" />
+	
+	            <TextView
+	                android:id="@+id/tvButterQty"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:gravity="center" />
+	
+	            <TextView
+	                android:id="@+id/tvButterTotal"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:gravity="center"
+	                android:text="P0.00" />
+	        </TableRow>
+	        
+	        <TableRow
+	            android:id="@+id/trChoco"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:padding="5dp"
+	            android:visibility="gone" >
+	
+	            <TextView
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:gravity="center"
+	                android:text="Choco Kisses" />
+	
+	            <TextView
+	                android:id="@+id/tvChocoQty"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:gravity="center" />
+	
+	            <TextView
+	                android:id="@+id/tvChocoTotal"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:gravity="center" />
+	        </TableRow>
+	
+	        <TableRow
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:padding="5dp" >
+	
+	            <TextView
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_weight="2"
+	                android:gravity="right"
+	                android:text="TOTAL:"
+	                android:textColor="#33b5e5"
+	                android:textStyle="bold" />
+	
+	            <TextView
+	                android:id="@+id/tvTotalAmount"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:gravity="center"
+	                android:textColor="#33b5e5"
+	                android:textStyle="bold" />
+	        </TableRow>
+	        
+	    </TableLayout>
+	
+	    <Button
+	        android:id="@+id/bTransactOrder"
+	        android:visibility="gone"
+	        style="?android:attr/buttonStyleSmall"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="right"
+	        android:text="Commit Transaction" />
+	
+	</LinearLayout>
+</ScrollView>

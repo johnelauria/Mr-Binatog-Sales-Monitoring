@@ -28,22 +28,25 @@
 	        <Button
 	            android:id="@+id/fragment1Small"
 	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
+	            android:layout_height="40dp"
 	            android:layout_weight="33"
+	            android:background="@drawable/custom_button"
 	            android:text="Small" />
 	
 	        <Button
 	            android:id="@+id/fragment1Medium"
 	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
+	            android:layout_height="40dp"
 	            android:layout_weight="33"
+	            android:background="@drawable/custom_button"
 	            android:text="Medium" />
 	
 	        <Button
 	            android:id="@+id/fragment1Large"
 	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
+	            android:layout_height="40dp"
 	            android:layout_weight="33"
+	            android:background="@drawable/custom_button"
 	            android:text="Large" />
 	    </LinearLayout>
 	    
@@ -70,7 +73,7 @@
 		        android:layout_width="40dp"
 		        android:layout_weight="1"
 		        android:layout_height="45dp"
-		        android:background="@drawable/milk_icon" />
+		        android:background="@drawable/milk_custom" />
 		    
 		    <Button
 		        android:id="@+id/bCheese"
@@ -78,7 +81,7 @@
 		        android:layout_width="40dp"
 		        android:layout_weight="1"
 		        android:layout_height="45dp"
-		        android:background="@drawable/cheese_icon" />
+		        android:background="@drawable/cheese_custom" />
 		    
 		    <Button
 		        android:id="@+id/bButter"
@@ -86,7 +89,7 @@
 		        android:layout_width="40dp"
 		        android:layout_weight="1"
 		        android:layout_height="45dp"
-		        android:background="@drawable/butter_icon" />
+		        android:background="@drawable/butter_custom" />
 		    
 		    <Button
 		        android:id="@+id/bChoco"
@@ -94,7 +97,7 @@
 		        android:layout_width="40dp"
 		        android:layout_weight="1"
 		        android:layout_height="45dp"
-		        android:background="@drawable/choco_icon" />
+		        android:background="@drawable/choco_custom" />
 	    
 	    </LinearLayout>
 	

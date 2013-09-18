@@ -1,5 +1,9 @@
 package com.example.ordermonitoring;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -32,6 +36,8 @@ public class DatabaseStorage {
 	private SQLiteDatabase myDb;
 	
 	private static class DbHelper extends SQLiteOpenHelper {
+		
+		public static String DB_FILEPATH = "//data//com.example.ordermonitoring//databases//OrderRecord.db";
 
 		public DbHelper(Context context) {
 			super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -52,6 +58,18 @@ public class DatabaseStorage {
 		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 			db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE);
 			onCreate(db);
+		}
+		
+		public boolean importDatabase(String dbPath) throws IOException {
+			close();
+			File newDb = new File(dbPath);
+			File oldDb = new File(DB_FILEPATH);
+			if (newDb.exists()) {
+				FileUtils.copyFile(new FileInputStream(newDb), new FileOutputStream(oldDb));
+				getWritableDatabase().close();
+				return true;
+			}
+			return false;
 		}
 	}
 	
@@ -117,9 +135,25 @@ public class DatabaseStorage {
 		int iChoco = c.getColumnIndex(KEY_CHOCO);
 		int iTotal = c.getColumnIndex(KEY_TOTAL);
 		for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
-			data.add(c.getString(iDate) + ", " + c.getString(iTime) + "\n" + c.getInt(iLarge) + " large, " + c.getInt(iMed) + " medium, " +
-					c.getInt(iSmall) + " small\n" + c.getInt(iMilky) + " Milky way, " + c.getInt(iChoco) + " Choco, " + c.getInt(iButter) +
-					" Butter, " + c.getInt(iCheese) + " Cheese\n" + "Total: P" + c.getInt(iTotal));
+			StringBuilder record = new StringBuilder();
+			//DISPLAY THE ORDER IF ITS QUANTITY IS NOT EQUAL TO 0
+			if (c.getInt(iLarge) != 0)
+				record.append(" - " + c.getInt(iLarge) + " Large");
+			if (c.getInt(iMed) != 0)
+				record.append(" - " + c.getInt(iMed) + " Medium");
+			if (c.getInt(iSmall) != 0)
+				record.append(" - " + c.getInt(iSmall) + " Small");
+			record.append("\n");
+			if (c.getInt(iMilky) != 0)
+				record.append(" - " + c.getInt(iMilky) + " Milky Way");
+			if (c.getInt(iChoco) != 0)
+				record.append(" - " + c.getInt(iChoco) + "Choco Kisses");
+			if (c.getInt(iButter) != 0)
+				record.append(" - " + c.getInt(iButter) + "Butter");
+			if (c.getInt(iCheese) != 0)
+				record.append(" - " + c.getInt(iCheese) + "Cheese");
+			record.append("\nTOTAL: P" + c.getInt(iTotal) + ".00");
+			data.add(c.getString(iDate) + ", " + c.getString(iTime) + "\n" + record.toString());
 			totalSales = totalSales + c.getInt(iTotal);
 		}
 		data.add("Total Sales: P" + totalSales + ".00");
@@ -143,9 +177,25 @@ public class DatabaseStorage {
 		int iChoco = c.getColumnIndex(KEY_CHOCO);
 		int iTotal = c.getColumnIndex(KEY_TOTAL);
 		for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
-			data.add(c.getString(iDate) + ", " + c.getString(iTime) + "\n" + c.getInt(iLarge) + " large, " + c.getInt(iMed) + " medium, " +
-					c.getInt(iSmall) + " small\n" + c.getInt(iMilky) + " Milky way, " + c.getInt(iChoco) + " Choco, " + c.getInt(iButter) +
-					" Butter, " + c.getInt(iCheese) + " Cheese\n" + "Total: P" + c.getInt(iTotal) + ".00");
+			StringBuilder record = new StringBuilder();
+			//DISPLAY THE ORDER IF ITS QUANTITY IS NOT EQUAL TO 0
+			if (c.getInt(iLarge) != 0)
+				record.append(" - " + c.getInt(iLarge) + " Large");
+			if (c.getInt(iMed) != 0)
+				record.append(" - " + c.getInt(iMed) + " Medium");
+			if (c.getInt(iSmall) != 0)
+				record.append(" - " + c.getInt(iSmall) + " Small");
+			record.append("\n");
+			if (c.getInt(iMilky) != 0)
+				record.append(" - " + c.getInt(iMilky) + " Milky Way");
+			if (c.getInt(iChoco) != 0)
+				record.append(" - " + c.getInt(iChoco) + "Choco Kisses");
+			if (c.getInt(iButter) != 0)
+				record.append(" - " + c.getInt(iButter) + "Butter");
+			if (c.getInt(iCheese) != 0)
+				record.append(" - " + c.getInt(iCheese) + "Cheese");
+			record.append("\nTOTAL: P" + c.getInt(iTotal) + ".00");
+			data.add(c.getString(iDate) + ", " + c.getString(iTime) + "\n" + record.toString());
 		}
 		return data;
 	}

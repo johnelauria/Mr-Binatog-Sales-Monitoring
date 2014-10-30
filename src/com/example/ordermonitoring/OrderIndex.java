@@ -2,19 +2,27 @@ package com.example.ordermonitoring;
 
 import java.io.FileNotFoundException;
 import java.util.List;
+import java.util.ArrayList;
 
 import android.app.ListActivity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ListView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 import android.os.Bundle;
 
-public class OrderIndex extends ListActivity {
+public class OrderIndex extends ListActivity implements DialogInterface.OnClickListener {
 	
 	DatabaseStorage myDb = new DatabaseStorage(this);
 	String[] orders;
 	Printer printer = new Printer();
+	private ArrayList<String> al;
+	private ArrayAdapter orderListAdapter;
+	private int listPositionClicked;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +38,28 @@ public class OrderIndex extends ListActivity {
 				List<String> listedData = myDb.listData(requestedDate);
 				orders = listedData.toArray(new String[listedData.size()]);
 			}
+			al = new ArrayList<String>();
+			orderListAdapter = new ArrayAdapter<String>(OrderIndex.this, android.R.layout.simple_list_item_1, al);
+			for (int c = 0; c < orders.length; c++) {
+				al.add(c, orders[c]);
+			}
+			
 		} catch(NullPointerException e) {
 			e.printStackTrace();
 		}
 		myDb.close();
-		setListAdapter(new ArrayAdapter<String>(OrderIndex.this, android.R.layout.simple_list_item_1, orders));
+		setListAdapter(orderListAdapter);
+	}
+	
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+		final AlertDialog confirmDelete = new AlertDialog.Builder(this, AlertDialog.THEME_HOLO_LIGHT).create();
+		listPositionClicked = position;
+		confirmDelete.setTitle("Confirm delete?");
+		confirmDelete.setMessage("Are you sure you want to delete this record?");
+		confirmDelete.setButton(AlertDialog.BUTTON_POSITIVE, "Yes", this);
+		confirmDelete.setButton(AlertDialog.BUTTON_NEGATIVE, "No", this);
+		confirmDelete.show();
 	}
 
 	@Override
@@ -77,6 +102,14 @@ public class OrderIndex extends ListActivity {
 			myDb.close();
 		}
 		return false;
+	}
+	
+	@Override
+	public void onClick(DialogInterface btn, int position) {
+		if (position == btn.BUTTON_POSITIVE) {
+			al.remove(listPositionClicked);
+			orderListAdapter.notifyDataSetChanged();
+		}
 	}
 	
 	

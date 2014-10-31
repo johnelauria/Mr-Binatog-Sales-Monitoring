@@ -95,7 +95,6 @@ public class DummySectionFragment extends Fragment implements OnClickListener {
 		trChoc.setVisibility(View.GONE);
 		trButt.setVisibility(View.GONE);
 		transact.setVisibility(View.GONE);
-		Toast.makeText(getActivity(), "Transaction saved", Toast.LENGTH_SHORT).show();
 		final Handler handler = new Handler();
 		handler.postDelayed(new Runnable() {
 			@Override
@@ -171,10 +170,11 @@ public class DummySectionFragment extends Fragment implements OnClickListener {
 				db.open();
 				db.CommitTransaction(lQty, mQty, sQty, milkyCounter, chocoCounter, butterCounter, cheeseCounter, orderTotal);
 				db.close();
+				Toast.makeText(getActivity(), "Transaction saved", Toast.LENGTH_SHORT).show();
 				//ASK IF EMPLOYEE NEEDS CALCULATOR FOR CHANGE
 				final AlertDialog changeCalculator = new AlertDialog.Builder(getActivity(), AlertDialog.THEME_HOLO_LIGHT).create();
-				changeCalculator.setTitle("Change Calculator");
-				changeCalculator.setMessage("Would you like me to calculate for the change?");
+				changeCalculator.setTitle("Transaction Saved");
+				changeCalculator.setMessage("Do you need a calculator for the change?");
 				changeCalculator.setButton(AlertDialog.BUTTON_POSITIVE, "Calculate", new DialogInterface.OnClickListener() {
 					
 					@Override
@@ -186,30 +186,31 @@ public class DummySectionFragment extends Fragment implements OnClickListener {
 						final EditText price = new EditText(getActivity());
 						
 						price.setInputType(InputType.TYPE_CLASS_NUMBER);
-						calculator.setMessage("Enter amount paid by customer. I will calculate the change for P" + orderTotal);
+						calculator.setMessage("Enter amount to calculate the change for P" + orderTotal);
 						calculator.setView(price);
 						calculator.setButton(AlertDialog.BUTTON_POSITIVE, "Compute", new DialogInterface.OnClickListener() {
 							
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
-								//DISPLAY CHANGE AMOUNT TO BE GIVEN TO CUSTOMER. THEN SAVE TRANSACTION TO DATABASE
-								int amountPaid = Integer.parseInt(price.getText().toString());
-								int change = amountPaid - orderTotal;
-								String message = "The change for P" + amountPaid + " is P" + change + ". "
-										+ "Don't forget to thank the customer with a smile!";
-								Dialog changeDialog = new Dialog(getActivity());
-								changeDialog.setTitle("Change is P" + change + ".00");
-								TextView changeDialogMsg = new TextView(getActivity());
-								changeDialogMsg.setText(message);
-								changeDialog.setContentView(changeDialogMsg);
-								changeDialog.show();
+								//DISPLAY CHANGE AMOUNT TO BE GIVEN TO CUSTOMER.
+								if (!price.getText().toString().isEmpty()) {
+									int amountPaid = Integer.parseInt(price.getText().toString());
+									int change = amountPaid - orderTotal;
+									String message = "The change for P" + amountPaid + " is P" + change;
+									Dialog changeDialog = new Dialog(getActivity());
+									changeDialog.setTitle("Change is P" + change + ".00");
+									TextView changeDialogMsg = new TextView(getActivity());
+									changeDialogMsg.setText(message);
+									changeDialog.setContentView(changeDialogMsg);
+									changeDialog.show();
+								}
 								saveTransaction();
 							}
 						});
 						calculator.show();
 					}
 				});
-				changeCalculator.setButton(AlertDialog.BUTTON_NEGATIVE, "No thanks", new DialogInterface.OnClickListener() {
+				changeCalculator.setButton(AlertDialog.BUTTON_NEGATIVE, "Nope", new DialogInterface.OnClickListener() {
 					
 					@Override
 					public void onClick(DialogInterface dialog, int which) {

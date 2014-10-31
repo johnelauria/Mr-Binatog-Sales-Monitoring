@@ -31,6 +31,9 @@ public class DatabaseStorage {
 	public static final String KEY_CHOCO = "choco_order";
 	public static final String KEY_TOTAL = "total_amount";
 	
+	public ArrayList<Integer> orderIds;
+	
+	private int ordersCounter = 0;
 	private Context myContext;
 	private DbHelper myHelper;
 	private SQLiteDatabase myDb;
@@ -87,6 +90,10 @@ public class DatabaseStorage {
 		myHelper.close();
 	}
 	
+	public void deleteById(long id) {
+		myDb.delete(DATABASE_TABLE, KEY_ROWID + "=" + id, null);
+	}
+	
 	public long CommitTransaction(int large, int medium, int small, int milkQty, int chocoQty, int butterQty, int cheeseQty, int total) {
 		Calendar c = Calendar.getInstance();
 		String daylight = null;
@@ -118,12 +125,14 @@ public class DatabaseStorage {
 	
 	public List<String> listData(String dateRequested) {
 		//LIST SALES ACCORDING TO SELECTED DATE
+		orderIds = new ArrayList<Integer>();
 		int totalSales = 0;
 		List<String> data = new ArrayList<String>();
 		String[] selectedDate = {dateRequested};
 		String[] columns = new String[] {KEY_DATE, KEY_TIME, KEY_SMALL, KEY_MEDIUM, KEY_LARGE, KEY_MILKY, KEY_CHOCO, 
-				KEY_BUTTER, KEY_CHEESE, KEY_TOTAL};
+				KEY_BUTTER, KEY_CHEESE, KEY_TOTAL, KEY_ROWID};
 		Cursor c = myDb.query(DATABASE_TABLE, columns, KEY_DATE + " = ?", selectedDate, null, null, null);
+		int iId = c.getColumnIndex(KEY_ROWID);
 		int iDate = c.getColumnIndex(KEY_DATE);
 		int iTime = c.getColumnIndex(KEY_TIME);
 		int iLarge = c.getColumnIndex(KEY_LARGE);
@@ -135,6 +144,8 @@ public class DatabaseStorage {
 		int iChoco = c.getColumnIndex(KEY_CHOCO);
 		int iTotal = c.getColumnIndex(KEY_TOTAL);
 		for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
+			orderIds.add(ordersCounter, c.getInt(iId));
+			ordersCounter++;
 			StringBuilder record = new StringBuilder();
 			//DISPLAY THE ORDER IF ITS QUANTITY IS NOT EQUAL TO 0
 			if (c.getInt(iLarge) != 0)
